@@ -17,6 +17,9 @@ import Notifications from './pages/Notifications';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUsers from './pages/AdminUsers';
 import AdminDonors from './pages/AdminDonors';
+import Landing from './pages/Landing';
+import About from './pages/About';
+import ForgotPassword from './pages/ForgotPassword';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
@@ -121,7 +124,9 @@ const AppRoutes = () => {
         </ProtectedRoute>
       } />
 
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );

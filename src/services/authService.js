@@ -1,16 +1,19 @@
-import api from './api';
+import { mockAuth } from './mockApi';
 
 export const register = async (userData) => {
-  const response = await api.post('/auth/register', userData);
-  return response.data;
+  return await mockAuth.register(userData);
 };
 
 export const login = async (credentials) => {
-  const response = await api.post('/auth/login', credentials);
-  return response.data;
+  return await mockAuth.login(credentials.email, credentials.password);
 };
 
 export const getProfile = async () => {
-  const response = await api.get('/auth/profile');
-  return response.data;
+  // Mock profile data - in real app this would fetch from API
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user;
+};
+
+export const logout = async () => {
+  return await mockAuth.logout();
 };

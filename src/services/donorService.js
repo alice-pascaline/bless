@@ -1,51 +1,30 @@
-import api from './api';
+import { mockProfileApi, mockMatchesApi, mockDonationsApi } from './mockApi';
+import { mockUsers } from './mockData';
 
 export const getDonors = async (params) => {
-  const response = await api.get('/donors', { params });
-  return response.data;
+  return [mockUsers.donor];
 };
-
-// export const getAvailableDonors = async (params) => {
-//   const response = await api.get('/donors/available', { params });
-//   return response.data;
-// };
-
-// export const getDonorById = async (id) => {
-//   const response = await api.get(`/donors/${id}`);
-//   return response.data;
-// };
 
 export const getDonorProfile = async () => {
-  const response = await api.get('/donors/profile');
-  return response.data;
+  return await mockProfileApi.getProfile();
 };
 
-// export const getDonorMatches = async () => {
-//   const response = await api.get('/donors/matches');
-//   return response.data;
-// };
-
 export const createDonationFromMatch = async (data) => {
-  const response = await api.post('/donors/donations', data);
-  return response.data;
+  return await mockDonationsApi.create(data);
 };
 
 export const getAvailableDonors = async (bloodType) => {
-  const response = await api.get('/donors/available', { params: { blood_type: bloodType } });
-  return response.data;
+  return [mockUsers.donor];
 };
 
 export const getDonorMatches = async () => {
-  const response = await api.get('/donors/matches');
-  return response.data;
+  return await mockMatchesApi.getMatches();
 };
 
 export const getDonorById = async (id) => {
-  const response = await api.get(`/donors/${id}`);
-  return response.data;
+  return mockUsers.donor;
 };
 
 export const updateDonorProfile = async (data) => {
-  const response = await api.put('/donors/profile', data);
-  return response.data;
+  return await mockProfileApi.updateProfile(mockUsers.donor.id, data);
 };
