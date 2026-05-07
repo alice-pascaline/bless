@@ -1,26 +1,31 @@
-import { mockNotificationsApi } from './mockApi';
+import api from './api';
 
 export const createNotification = async (data) => {
-  return { success: true };
+  const response = await api.post('/notifications', data);
+  return response.data;
 };
 
 export const getNotifications = async (params) => {
-  return await mockNotificationsApi.getAll();
+  const response = await api.get('/notifications', { params });
+  return response.data;
 };
 
 export const getUnreadCount = async () => {
-  const notifications = await mockNotificationsApi.getAll();
-  return notifications.filter(n => !n.read).length;
+  const response = await api.get('/notifications/unread/count');
+  return response.data;
 };
 
 export const markAsRead = async (id) => {
-  return await mockNotificationsApi.markAsRead(id);
+  const response = await api.put(`/notifications/${id}/read`);
+  return response.data;
 };
 
 export const markAllAsRead = async () => {
-  return { success: true };
+  const response = await api.put('/notifications/read-all');
+  return response.data;
 };
 
 export const deleteNotification = async (id) => {
-  return { success: true };
+  const response = await api.delete(`/notifications/${id}`);
+  return response.data;
 };

@@ -1,19 +1,21 @@
-import { mockHospitalsApi, mockBloodRequestsApi } from './mockApi';
-import { mockUsers } from './mockData';
+import api from './api';
 
 export const getHospitals = async (params) => {
-  return await mockHospitalsApi.getAll();
+  const response = await api.get('/hospitals', { params });
+  return response.data;
 };
 
 export const getHospitalById = async (id) => {
-  const hospitals = await mockHospitalsApi.getAll();
-  return hospitals.find(h => h.id === parseInt(id));
+  const response = await api.get(`/hospitals/${id}`);
+  return response.data;
 };
 
 export const getHospitalBloodRequests = async () => {
-  return await mockBloodRequestsApi.getAll();
+  const response = await api.get('/blood-requests/hospital');
+  return response.data;
 };
 
 export const updateHospitalProfile = async (data) => {
-  return { ...mockUsers.hospital, ...data };
+  const response = await api.put('/hospitals/profile', data);
+  return response.data;
 };

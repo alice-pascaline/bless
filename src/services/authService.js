@@ -1,19 +1,21 @@
-import { mockAuth } from './mockApi';
+import api from './api';
 
 export const register = async (userData) => {
-  return await mockAuth.register(userData);
+  const response = await api.post('/auth/register', userData);
+  return response.data;
 };
 
 export const login = async (credentials) => {
-  return await mockAuth.login(credentials.email, credentials.password);
+  const response = await api.post('/auth/login', credentials);
+  return response.data;
 };
 
 export const getProfile = async () => {
-  // Mock profile data - in real app this would fetch from API
-  const user = JSON.parse(localStorage.getItem('user'));
-  return user;
+  const response = await api.get('/auth/profile');
+  return response.data;
 };
 
 export const logout = async () => {
-  return await mockAuth.logout();
+  // Client-side logout - token removal is handled by AuthContext
+  return { message: 'Logged out successfully' };
 };

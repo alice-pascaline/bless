@@ -1,26 +1,31 @@
-import { mockMatchesApi } from './mockApi';
+import api from './api';
 
 export const getMatches = async (params) => {
-  return await mockMatchesApi.getMatches();
+  const response = await api.get('/matches', { params });
+  return response.data;
 };
 
 export const getDonorMatches = async () => {
-  return await mockMatchesApi.getMatches();
+  const response = await api.get('/matches/donor');
+  return response.data;
 };
 
 export const getHospitalMatches = async () => {
-  return await mockMatchesApi.getMatches();
+  const response = await api.get('/matches/hospital');
+  return response.data;
 };
 
 export const getMatchById = async (id) => {
-  const matches = await mockMatchesApi.getMatches();
-  return matches.find(m => m.id === parseInt(id));
+  const response = await api.get(`/matches/${id}`);
+  return response.data;
 };
 
 export const acceptMatch = async (id) => {
-  return await mockMatchesApi.acceptMatch(id);
+  const response = await api.put(`/matches/${id}/accept`);
+  return response.data;
 };
 
 export const declineMatch = async (id) => {
-  return { success: true };
+  const response = await api.put(`/matches/${id}/decline`);
+  return response.data;
 };

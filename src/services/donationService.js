@@ -1,26 +1,31 @@
-import { mockDonationsApi } from './mockApi';
+import api from './api';
 
 export const getDonations = async (params) => {
-  return await mockDonationsApi.getAll();
+  const response = await api.get('/donations', { params });
+  return response.data;
 };
 
 export const getDonationById = async (id) => {
-  const donations = await mockDonationsApi.getAll();
-  return donations.find(d => d.id === parseInt(id));
+  const response = await api.get(`/donations/${id}`);
+  return response.data;
 };
 
 export const createDonation = async (data) => {
-  return await mockDonationsApi.create(data);
+  const response = await api.post('/donations', data);
+  return response.data;
 };
 
 export const updateDonation = async (id, data) => {
-  return { success: true };
+  const response = await api.put(`/donations/${id}`, data);
+  return response.data;
 };
 
 export const getMyDonations = async () => {
-  return await mockDonationsApi.getAll();
+  const response = await api.get('/donations/my');
+  return response.data;
 };
 
 export const completeDonation = async (id) => {
-  return { success: true };
+  const response = await api.put(`/donations/${id}/complete`);
+  return response.data;
 };
